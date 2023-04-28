@@ -1,3 +1,9 @@
+import { GlobalProvider } from './providers/globalProvider';
+
 export const App = () => {
-  return <h1>Hello world</h1>;
+  return (
+    <GlobalProvider>
+      <h1>Hello world</h1>
+    </GlobalProvider>
+  );
 };
