@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "skipLibCheck": true
+  },
+  "include": ["server"]
+}
