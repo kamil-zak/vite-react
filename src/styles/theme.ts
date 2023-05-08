@@ -2,7 +2,8 @@ import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   colors: {
-    primary: '#AAAAAA',
+    primary: '#283CA5',
+    primaryLight: '#6778D1',
   },
   fontSizes: {
     xxs: '12px',
