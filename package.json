@@ -2,12 +2,18 @@
   "name": "vite-react",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "main": "dist/electron/main.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "dev:vite": "vite",
+    "build:vite": "tsc && vite build",
+    "build:electron": "webpack --config ./webpack.config.cjs",
+    "start:electron": "npm run build:electron && electron ./dist/electron/main.js",
+    "dev:electron": "nodemon --exec npm run start:electron",
+    "dev": "concurrently \"npm run dev:vite\" \"npm run dev:electron\" --kill-others",
+    "build": "cross-env NODE_ENV=production npm run build:vite && npm run build:electron",
+    "pack": "npm run build && electron-builder --dir",
+    "release": "npm run build && electron-builder",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -17,20 +23,48 @@
     "styled-components": "^5.3.10"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "concurrently": "^8.0.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^24.2.0",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "husky": "^8.0.0",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
+    "ts-loader": "^9.4.2",
     "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "build": {
+    "appId": "vitereact.id",
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "portable": {
+      "artifactName": "react_portable.exe"
+    },
+    "directories": {
+      "output": "releases/${arch}"
+    },
+    "files": [
+      "dist/**/*",
+      "!node_modules/**/*"
+    ]
   }
 }

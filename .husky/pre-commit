@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx tsc
+npx tsc --project tsconfig.electron.json --noEmit
 npx lint-staged
