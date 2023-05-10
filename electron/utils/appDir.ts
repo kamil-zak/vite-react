@@ -1,5 +1,8 @@
 import { join } from 'path';
 
+const portableDir = process.env.PORTABLE_EXECUTABLE_DIR;
+
 export const getAppDirPath = (...segments: string[]) => {
-  return process.env.PORTABLE_EXECUTABLE_DIR || join(__dirname, '..', '..', 'appDir', ...segments);
+  if (portableDir) return join(portableDir, ...segments);
+  return join(__dirname, '..', '..', 'appDir', ...segments);
 };

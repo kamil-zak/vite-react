@@ -1,6 +1,6 @@
 import 'styled-components';
 
-type ColorName = 'primary';
+type ColorName = 'primary' | 'blue';
 
 type FontSizeName = 'xxs' | 'xs' | 's' | 'base' | 'lg' | 'xl';
 
