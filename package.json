@@ -1,8 +1,11 @@
 {
-  "name": "vite-react",
+  "name": "iqos-pwa-tap",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "workspaces": [
+    "packages/**"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,11 +14,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@vitejs/plugin-legacy": "^4.0.4",
+    "axios": "^1.4.0",
     "idb": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.10",
+    "uuid": "^9.0.0",
     "vite-plugin-pwa": "^0.14.7",
     "vite-plugin-static-copy": "^0.14.0"
   },
@@ -23,6 +29,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react-swc": "^3.0.0",

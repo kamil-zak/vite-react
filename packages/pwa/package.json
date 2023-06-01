@@ -1,0 +1,8 @@
+{
+  "name": "@picsane/pwa",
+  "exports": {
+    "./stats": "./stats/index.ts",
+    "./version-monitor": "./version-monitor/index.ts",
+    "./only-standalone": "./only-standalone/index.ts"
+  }
+}

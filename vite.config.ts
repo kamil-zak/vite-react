@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
 import { ViteStaticCopyOptions, viteStaticCopy } from 'vite-plugin-static-copy';
+import legacy from '@vitejs/plugin-legacy';
 
 const getPwaIcon = (sizes: string) => ({ src: `pwa-icons/icon-${sizes}.png`, sizes, type: 'image/png' });
 
@@ -11,7 +12,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
     name: 'PWA Application',
     short_name: 'PwaApp',
     theme_color: '#6B76C2',
-    background_color: '#FFFFFF',
+    background_color: '#000000',
     display: 'standalone',
     icons: ['192x192', '256x256', '384x384', '512x512'].map(getPwaIcon),
   },
@@ -21,12 +22,19 @@ const pwaOptions: Partial<VitePWAOptions> = {
 };
 
 const copyOptions: ViteStaticCopyOptions = {
-  targets: [{ src: 'src/pwa/pwaInfo.json', dest: '' }],
+  targets: [{ src: 'src/pwaInfo.json', dest: '' }],
 };
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA(pwaOptions), viteStaticCopy(copyOptions)],
+  plugins: [
+    react(),
+    VitePWA(pwaOptions),
+    viteStaticCopy(copyOptions),
+    legacy({
+      targets: ['Safari 13'],
+    }),
+  ],
   server: {
     host: true,
   },

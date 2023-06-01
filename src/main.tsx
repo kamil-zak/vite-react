@@ -1,17 +1,17 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App.tsx';
 import { registerSW } from 'virtual:pwa-register';
-import { initMonitor } from './pwa/versionMonitor.ts';
-import { OnlyStandalone } from './pwa/OnlyStandalone/OnlyStandalone.tsx';
+import { initVersionMonitor } from '@picsane/pwa/version-monitor';
+import { OnlyStandalone } from '@picsane/pwa/only-standalone';
+import pwaInfo from './pwaInfo.json';
 
 registerSW({ immediate: true });
-initMonitor();
+initVersionMonitor('/pwaInfo.json', pwaInfo.version);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <>
     <OnlyStandalone>
       <App />
     </OnlyStandalone>
-  </React.StrictMode>,
+  </>,
 );
