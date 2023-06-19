@@ -23,8 +23,8 @@ export const Teams: FC<ITeamsProps> = ({ onReady }) => {
   return (
     <TeamsWrapper>
       <TeamsIcon src={teamsIcon} alt="teams" />
-      <Input value={team1} onChange={(e) => setTeam1(e.target.value)} maxLength={15} />
-      <Input value={team2} onChange={(e) => setTeam2(e.target.value)} maxLength={15} />
+      <Input value={team1} onChange={(e) => setTeam1(e.target.value.toUpperCase())} maxLength={15} />
+      <Input value={team2} onChange={(e) => setTeam2(e.target.value.toUpperCase())} maxLength={15} />
       <SaveBtn onClick={handleSubmit} src={saveBtn} alt="save" />
     </TeamsWrapper>
   );
