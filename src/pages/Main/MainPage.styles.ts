@@ -1,47 +1,22 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const MainPageWrapper = styled.div`
   padding: 50px 20px;
   display: grid;
-  gap: 100px;
+  gap: 5vh;
   justify-items: center;
+`;
+
+export const MainPageLogo = styled.img`
+  max-width: 80vw;
+  max-height: 20vh;
 `;
 
 export const ActionsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-
-  @media (min-width: 1000px) {
-    flex-direction: row;
-    gap: 60px;
-  }
-`;
-
-export const ActionButton = styled.div<{ newGame?: boolean }>`
   display: grid;
-  gap: 10px;
-  justify-items: center;
-
-  ${({ newGame }) =>
-    newGame &&
-    css`
-      @media (min-width: 1000px) {
-        margin-right: 80px;
-        gap: 20px;
-      }
-    `}
 `;
 
-export const ActionText = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
-export const ActionImage = styled.img`
-  height: 50px;
-
-  @media (min-width: 1000px) {
-    height: 150px;
-  }
+export const ActionImg = styled.img`
+  max-width: 50vw;
+  max-height: 15vh;
 `;

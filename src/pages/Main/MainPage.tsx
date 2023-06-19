@@ -1,30 +1,27 @@
-import { useNavigate } from 'react-router-dom';
 import { sendOsc } from '../../services/oscService';
-import { ActionButton, ActionImage, ActionText, ActionsList, MainPageWrapper } from './MainPage.styles';
-import newGame from '../../assets/newGame.svg';
-import playGame from '../../assets/playGame.svg';
-import pauseGame from '../../assets/pauseGame.svg';
-import { Button } from '../../components/Button/Button';
+import { ActionImg, ActionsList, MainPageLogo, MainPageWrapper } from './MainPage.styles';
+import startGameBtn from '../../assets/buttons/start_game.btn.png';
+import pauseGameBtn from '../../assets/buttons/pause_game.btn.png';
+import newGameBtn from '../../assets/buttons/new_game.btn.png';
+import setTeamsBtn from '../../assets/buttons/set_teams.btn.png';
+import logo from '../../assets/pong_logo.png';
+import { useState } from 'react';
+import { Teams } from './components/Teams/Teams';
 
 export const MainPage = () => {
-  const navigate = useNavigate();
+  const [isTeamsMode, setIsTeamsMode] = useState(false);
   return (
     <MainPageWrapper>
-      <Button onClick={() => navigate('/teams')}>SET TEAMS</Button>
-      <ActionsList>
-        <ActionButton onClick={() => sendOsc('/newGame')} newGame>
-          <ActionImage src={newGame} alt="new game" />
-          <ActionText>NEW GAME</ActionText>
-        </ActionButton>
-        <ActionButton onClick={() => sendOsc('/startGame')}>
-          <ActionImage src={playGame} alt="start game" />
-          <ActionText>START GAME</ActionText>
-        </ActionButton>
-        <ActionButton onClick={() => sendOsc('/pauseGame')}>
-          <ActionImage src={pauseGame} alt="pause game" />
-          <ActionText>PAUSE GAME</ActionText>
-        </ActionButton>
-      </ActionsList>
+      <MainPageLogo src={logo} alt="logo" />
+      {isTeamsMode && <Teams onReady={() => setIsTeamsMode(false)} />}
+      {!isTeamsMode && (
+        <ActionsList>
+          <ActionImg onClick={() => sendOsc('/newGame')} src={newGameBtn} alt="new game" />
+          <ActionImg onClick={() => sendOsc('/startGame')} src={startGameBtn} alt="start game" />
+          <ActionImg onClick={() => sendOsc('/pauseGame')} src={pauseGameBtn} alt="pause game" />
+          <ActionImg onClick={() => setIsTeamsMode(true)} src={setTeamsBtn} alt="set teams" />
+        </ActionsList>
+      )}
     </MainPageWrapper>
   );
 };
