@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import bg from '../../assets/bg.png';
 
 export const MainPageWrapper = styled.div`
   display: grid;
@@ -15,15 +14,13 @@ export const PreviewLines = styled.div`
   gap: 5px;
   box-sizing: border-box;
   padding: 10px;
-  background-image: url(${bg});
-  background-position: 85px;
   background-size: contain;
   background-repeat: no-repeat;
 `;
 
 export const PreviewLine = styled.div`
   display: grid;
-  gap: 15px;
+  gap: 40px;
   grid-template-columns: max-content 1fr;
   align-items: center;
 `;
@@ -35,12 +32,5 @@ export const TabConfigurator = styled.div`
   gap: 5px;
   align-items: center;
   width: 70px;
-`;
-
-export const TabConfiguratorButton = styled.button`
-  background: ${({ theme }) => theme.colors.primary};
-  border-radius: 10px;
-  padding: 5px 10px;
-  border: 0;
   color: white;
 `;

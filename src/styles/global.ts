@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import bgImg from '../assets/bg.png';
 
 export const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -8,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 800;
     font-style: normal;
     font-display: swap;
+   
 }
 
 
@@ -15,7 +17,10 @@ export const GlobalStyles = createGlobalStyle`
      font-family: "Mont Heavy", sans-serif;
      margin: 0;
      padding: 0;
-     background: #EBF4FF;
+     background: url(${bgImg});
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;;
    }
    a {
      color: inherit;
