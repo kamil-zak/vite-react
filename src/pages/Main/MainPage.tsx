@@ -1,6 +1,6 @@
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Input } from '../../components/Input/Input';
-import { MainPageWrapper, PreviewLine, PreviewLines, TabConfigurator } from './MainPage.styles';
+import { MainPageWrapper, PreviewLine, PreviewLines, TabConfigurator, Thanks } from './MainPage.styles';
 import { sendOsc } from '../../services/oscService';
 import { transformTabs } from './utils/tabs';
 import saveBtn from '../../assets/save.png';
@@ -12,6 +12,8 @@ const initialLines = [...Array(5)].map(() => ({ value: '', tabs: 0 }));
 export const MainPage = () => {
   const [lines, setLines] = useState(initialLines);
   const [author, setAuthor] = useState('');
+
+  const [isThanks, setIsThanks] = useState(false);
 
   const updateLineValue = useCallback((idx: number, val: string) => {
     const value = val.toUpperCase().trimStart();
@@ -40,11 +42,20 @@ export const MainPage = () => {
     if (author.length < 1 || text.length < 5) return;
 
     sendOsc('/gloMsgUser', [author]);
+    console.log(text);
     sendOsc('/gloMsg1', [text]);
+    setIsThanks(true);
     setLines(initialLines);
     setAuthor('');
   };
 
+  useEffect(() => {
+    if (!isThanks) return;
+    const timeout = setTimeout(() => setIsThanks(false), 5000);
+    return () => clearTimeout(timeout);
+  }, [isThanks]);
+
+  if (isThanks) return <Thanks>Dziekujemy</Thanks>;
   return (
     <MainPageWrapper>
       <PreviewLines>

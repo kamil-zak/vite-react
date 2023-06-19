@@ -34,3 +34,12 @@ export const TabConfigurator = styled.div`
   width: 70px;
   color: white;
 `;
+
+export const Thanks = styled.div`
+  height: 99vh;
+  font-size: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
