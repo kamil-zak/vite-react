@@ -8,7 +8,7 @@ export const MainPageWrapper = styled.div`
 `;
 
 export const PreviewLines = styled.div`
-  width: 500px;
+  width: 550px;
   max-width: 100vw;
   display: grid;
   gap: 5px;

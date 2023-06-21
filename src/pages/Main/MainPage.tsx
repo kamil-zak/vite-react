@@ -6,14 +6,29 @@ import { transformTabs } from './utils/tabs';
 import saveBtn from '../../assets/save.png';
 import minusBtn from '../../assets/minus.png';
 import plusBtn from '../../assets/plus.png';
+import { getSeconds } from '../../services/configService';
 
 const initialLines = [...Array(5)].map(() => ({ value: '', tabs: 0 }));
 
 export const MainPage = () => {
   const [lines, setLines] = useState(initialLines);
   const [author, setAuthor] = useState('');
+  const [sendDate, setSendDate] = useState(new Date());
+  const [seconds, setSeconds] = useState(30);
+  useEffect(() => {
+    getSeconds().then((seconds) => seconds && setSeconds(seconds));
+  }, []);
 
   const [isThanks, setIsThanks] = useState(false);
+
+  const sendPause = useCallback(() => {
+    sendOsc('/gloVideo', [1]);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(sendPause, seconds * 1000);
+    return () => clearTimeout(timeout);
+  }, [sendDate, sendPause, seconds]);
 
   const updateLineValue = useCallback((idx: number, val: string) => {
     const value = val.toUpperCase().trimStart();
@@ -42,11 +57,12 @@ export const MainPage = () => {
     if (author.length < 1 || text.length < 5) return;
 
     sendOsc('/gloMsgUser', [author]);
-    console.log(text);
     sendOsc('/gloMsg1', [text]);
+    sendOsc('/gloVideo', [0]);
     setIsThanks(true);
     setLines(initialLines);
     setAuthor('');
+    setSendDate(new Date());
   };
 
   useEffect(() => {
@@ -71,7 +87,7 @@ export const MainPage = () => {
               value={line.value}
               tabs={line.tabs}
               onChange={(e) => updateLineValue(i, e.target.value)}
-              maxLength={11}
+              maxLength={12}
             />
           </PreviewLine>
         ))}
